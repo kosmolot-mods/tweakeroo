@@ -1071,7 +1071,7 @@ public class PlacementTweaks
     private static boolean canPlaceBlockIntoPosition(World world, BlockPos pos, ItemPlacementContext useContext)
     {
         BlockState state = world.getBlockState(pos);
-        return state.canReplace(useContext) || state.getMaterial().isLiquid() || state.getMaterial().isReplaceable();
+        return state.canReplace(useContext) || state.method_51176() || state.getMaterial().isReplaceable();
     }
 
     private static boolean isNewPositionValidForColumnMode(BlockPos posNew, BlockPos posFirst, Direction sideFirst)
