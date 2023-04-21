@@ -734,7 +734,7 @@ public class PlacementTweaks
         }
 
         if (FeatureToggle.TWEAK_PLACEMENT_RESTRICTION.getBooleanValue() &&
-            state.canReplace(ctx) == false && state.getMaterial().isReplaceable())
+            state.canReplace(ctx) == false && state.isReplaceable())
         {
             // If the block itself says it's not replaceable, but the material is (fluids),
             // then we need to offset the position back, otherwise the check in ItemBlock
@@ -1071,7 +1071,7 @@ public class PlacementTweaks
     private static boolean canPlaceBlockIntoPosition(World world, BlockPos pos, ItemPlacementContext useContext)
     {
         BlockState state = world.getBlockState(pos);
-        return state.canReplace(useContext) || state.method_51176() || state.getMaterial().isReplaceable();
+        return state.canReplace(useContext) || state.isLiquid() || state.isReplaceable();
     }
 
     private static boolean isNewPositionValidForColumnMode(BlockPos posNew, BlockPos posFirst, Direction sideFirst)

@@ -1,6 +1,7 @@
 package fi.dy.masa.tweakeroo.event;
 
 import com.mojang.blaze3d.systems.RenderSystem;
+import net.minecraft.client.gui.DrawableHelper;
 import org.joml.Matrix4f;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.util.math.MatrixStack;
@@ -21,14 +22,14 @@ import fi.dy.masa.tweakeroo.renderer.RenderUtils;
 public class RenderHandler implements IRenderer
 {
     @Override
-    public void onRenderGameOverlayPost(MatrixStack matrixStack)
+    public void onRenderGameOverlayPost(DrawableHelper drawableHelper)
     {
         MinecraftClient mc = MinecraftClient.getInstance();
 
         if (FeatureToggle.TWEAK_HOTBAR_SWAP.getBooleanValue() &&
             Hotkeys.HOTBAR_SWAP_BASE.getKeybind().isKeybindHeld())
         {
-            RenderUtils.renderHotbarSwapOverlay(mc, matrixStack);
+            RenderUtils.renderHotbarSwapOverlay(mc, drawableHelper);
         }
         else if (FeatureToggle.TWEAK_HOTBAR_SCROLL.getBooleanValue() &&
                  Hotkeys.HOTBAR_SCROLL.getKeybind().isKeybindHeld())
@@ -39,7 +40,7 @@ public class RenderHandler implements IRenderer
         if (FeatureToggle.TWEAK_INVENTORY_PREVIEW.getBooleanValue() &&
             Hotkeys.INVENTORY_PREVIEW.getKeybind().isKeybindHeld())
         {
-            RenderUtils.renderInventoryOverlay(mc, matrixStack);
+            RenderUtils.renderInventoryOverlay(mc, drawableHelper);
         }
 
         if (FeatureToggle.TWEAK_PLAYER_INVENTORY_PEEK.getBooleanValue() &&
@@ -51,7 +52,7 @@ public class RenderHandler implements IRenderer
         if (FeatureToggle.TWEAK_SNAP_AIM.getBooleanValue() &&
             Configs.Generic.SNAP_AIM_INDICATOR.getBooleanValue())
         {
-            RenderUtils.renderSnapAimAngleIndicator(matrixStack);
+            RenderUtils.renderSnapAimAngleIndicator(drawableHelper);
         }
 
         if (FeatureToggle.TWEAK_ELYTRA_CAMERA.getBooleanValue())
@@ -60,7 +61,7 @@ public class RenderHandler implements IRenderer
 
             if (mode == ActiveMode.ALWAYS || (mode == ActiveMode.WITH_KEY && Hotkeys.ELYTRA_CAMERA.getKeybind().isKeybindHeld()))
             {
-                RenderUtils.renderPitchLockIndicator(mc, matrixStack);
+                RenderUtils.renderPitchLockIndicator(mc, drawableHelper);
             }
         }
     }
