@@ -2,7 +2,7 @@ package fi.dy.masa.tweakeroo.mixin;
 
 import java.util.Arrays;
 
-import net.minecraft.client.gui.DrawableHelper;
+import net.minecraft.client.gui.DrawContext;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -132,19 +132,19 @@ public abstract class MixinCommandBlockScreen extends AbstractCommandBlockScreen
     }
 
     @Override
-    public void render(DrawableHelper drawableHelper, int mouseX, int mouseY, float partialTicks)
+    public void render(DrawContext drawContext, int mouseX, int mouseY, float partialTicks)
     {
-        super.render(drawableHelper, mouseX, mouseY, partialTicks);
+        super.render(drawContext, mouseX, mouseY, partialTicks);
 
         if (this.textFieldName != null)
         {
-            this.textFieldName.render(drawableHelper, mouseX, mouseY, partialTicks);
+            this.textFieldName.render(drawContext, mouseX, mouseY, partialTicks);
         }
 
         if (this.buttonUpdateExec != null && this.buttonUpdateExec.isHovered())
         {
             String hover = "tweakeroo.gui.button.misc.command_block.hover.update_execution";
-            RenderUtils.drawHoverText(mouseX, mouseY, Arrays.asList(StringUtils.translate(hover)), drawableHelper);
+            RenderUtils.drawHoverText(mouseX, mouseY, Arrays.asList(StringUtils.translate(hover)), drawContext);
         }
     }
 

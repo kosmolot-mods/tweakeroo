@@ -1,6 +1,6 @@
 package fi.dy.masa.tweakeroo.mixin;
 
-import net.minecraft.client.gui.DrawableHelper;
+import net.minecraft.client.gui.DrawContext;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -12,7 +12,7 @@ import fi.dy.masa.tweakeroo.config.Configs;
 public abstract class MixinBossBarHud
 {
     @Inject(method = "render", at = @At("HEAD"), cancellable = true)
-    private void tweakeroo_disableBossBarRendering(DrawableHelper drawableHelper, CallbackInfo ci)
+    private void tweakeroo_disableBossBarRendering(DrawContext drawContext, CallbackInfo ci)
     {
         if (Configs.Disable.DISABLE_BOSS_BAR.getBooleanValue())
         {

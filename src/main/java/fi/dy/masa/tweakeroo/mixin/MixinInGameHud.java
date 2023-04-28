@@ -1,5 +1,6 @@
 package fi.dy.masa.tweakeroo.mixin;
 
+import net.minecraft.client.gui.DrawContext;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -8,7 +9,6 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.gui.hud.InGameHud;
 import net.minecraft.client.gui.hud.PlayerListHud;
 import net.minecraft.entity.player.PlayerEntity;
@@ -50,7 +50,7 @@ public abstract class MixinInGameHud
             at = @At(value = "INVOKE",
                      target = "Lnet/minecraft/client/gui/hud/PlayerListHud;setVisible(Z)V",
                      ordinal = 1, shift = At.Shift.AFTER))
-    private void alwaysRenderPlayerList(DrawableHelper drawableHelper, float tickDelta, CallbackInfo ci)
+    private void alwaysRenderPlayerList(DrawContext drawContext, float tickDelta, CallbackInfo ci)
     {
         if (FeatureToggle.TWEAK_PLAYER_LIST_ALWAYS_ON.getBooleanValue())
         {
@@ -58,7 +58,7 @@ public abstract class MixinInGameHud
             ScoreboardObjective objective = scoreboard.getObjectiveForSlot(0);
 
             this.playerListHud.setVisible(true);
-            this.playerListHud.render(drawableHelper, this.scaledWidth, scoreboard, objective);
+            this.playerListHud.render(drawContext, this.scaledWidth, scoreboard, objective);
         }
     }
 

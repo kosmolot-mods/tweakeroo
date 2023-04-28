@@ -1,6 +1,6 @@
 package fi.dy.masa.tweakeroo.mixin;
 
-import net.minecraft.client.gui.DrawableHelper;
+import net.minecraft.client.gui.DrawContext;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -21,7 +21,7 @@ public abstract class MixinAbstractInventoryScreen<T extends ScreenHandler> exte
     }
 
     @Inject(method = "drawStatusEffects", at = @At("HEAD"), cancellable = true)
-    private void disableStatusEffectRendering(DrawableHelper drawableHelper, int mouseX, int mouseY, CallbackInfo ci)
+    private void disableStatusEffectRendering(DrawContext drawContext, int mouseX, int mouseY, CallbackInfo ci)
     {
         if (Configs.Disable.DISABLE_INVENTORY_EFFECTS.getBooleanValue())
         {
